@@ -9,9 +9,19 @@ class YellowController < ApplicationController
 ##개포동역
   end
 
-  def lucky11
+  def lucky2
+
+#개포동역2
+
+  end
+  
+  def lucky3
 
   end
 
+
+  def bench1
+
+  end
 
 end
