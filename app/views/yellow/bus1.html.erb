@@ -1,0 +1,203 @@
+<script type="text/javascript">
+
+    var my_lat, my_lon, geocoder, location1, location2, map, my_location;
+
+//여기서부터는 내위치찾는거
+function initialize() {
+
+  geocoder = new GClientGeocoder();
+
+  var mapOptions = {
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  // Try HTML5 geolocation 여기에서 position.coords.latitude 이게 의심스러움ㅋㅋ
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+        my_lat = position.coords.latitude;
+       my_lon = position.coords.longitude;
+      
+        var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+
+      var infowindow = new google.maps.InfoWindow({
+        
+
+        map: map,
+        position: pos,
+        content: '당신의 위치입니다.'
+      });
+
+      map.setCenter(pos);
+    }, function() {
+      handleNoGeolocation(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+
+function handleNoGeolocation(errorFlag) {
+  if (errorFlag) {
+    var content = 'GPS기능을 사용할 수 없습니다.(당신의 기기에 GPS가 없을 수도 있음ㅋㅋ)';
+  } else {
+    var content = '당신의 브라우저가 GPS를 활용할 수 없는 브라우저입니다.';
+  }
+
+  var options = {
+    map: map,
+    position: new google.maps.LatLng(60, 105),
+    content: content
+  };
+
+  var infowindow = new google.maps.InfoWindow(options);
+  map.setCenter(options.position);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+//이밑에꺼는 거리계산하는거
+
+    function showLocation() {
+
+        geocoder.getLocations(document.forms[0].address1.value, function (response) {
+            if (!response || response.Status.code != 200)
+            {
+                alert("Sorry, we were unable to geocode the first address");
+            }
+            else
+            {
+                location1 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
+             calculateDistance(); 
+               
+            }
+        });
+    }
+
+  function gaepo(){
+    if(document.forms[0].bus.value == "9371"){
+      alert("9371 맞다. 역시 여기에 자주 오는군.");
+      location.href = "/../yellow/bus2/";
+    }
+    else { alert("틀렸다. 다시 맞춰봐라.");
+    }
+  }
+
+
+    function goal(){
+
+      calculateDistance();
+        
+
+    }
+
+    function arrive(){
+      
+      try
+        {
+            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng2 = new GLatLng(my_lat, my_lon);
+            var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
+            var kmdistance = (miledistance * 1.609344).toFixed(1);
+ 
+  if(kmdistance < 1) {
+    location.href = "/yellow/lucky2/";
+  }
+  else { 
+        alert("아직 도착하지 못했네요ㅠㅠ지도상에서 당신의 위치를 다시한번 확인해 보시겠어요?");
+  }
+      
+            
+            }
+
+        catch (error)
+        {
+            alert(error);
+        }
+
+    }
+
+
+
+    function calculateDistance()
+    {
+        try
+        {
+            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng2 = new GLatLng(my_lat, my_lon);
+            var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
+            var kmdistance = (miledistance * 1.609344).toFixed(1);
+
+            document.getElementById('results').innerHTML = '<br /><strong>당신이 있는 곳부터의 거리: </strong>' + kmdistance + ' (km)';
+        }
+        catch (error)
+        {
+            alert(error);
+        }
+    }
+
+    </script>
+
+<div class = "whitebox">
+<div class="main">
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ 
+<script>
+$(function() {
+     $('#two').click(function(){
+       $("#one").fadeOut('slow',function (){
+       $("#one").attr('src',"<%= asset_path("blue.jpg")%>");
+       $("#one").attr('class',"blue");
+       $("#one").fadeIn('slow');
+             return false;
+              });
+
+       document.getElementById('story1').innerHTML ='<br><strong> 청룡</strong><br><br> 엣헴... 나는 파란버스...가 아니라 파란 용이라네. 왠지 낯이 익은 걸 보니 406을 자주 탔나 보구만. 그럼 나도 문제를 내겠네. 이 정류장에 정차하는 버스의 번호를 다 더하면 몇일까? 참 쉽지?<br><br>';      return false;
+
+       });
+     });
+
+</script>
+<a href="" id="two">
+<img src= "<%= asset_path("406.jpg")%>" id="one"  class="lucky"/>
+</a>
+
+<p id = "story1"><strong>406 버스 정류장에 도착했다. 위의 사진을 눌러보자. </strong>
+<br><br>
+</div>
+</div>
+<div class ="whitebox">
+<br>
+<form style="margin-left:10px;"  onsubmit="gaepo(); return false;">
+      <p>
+<input type="text" name="bus" value="" size = "4"/>
+        <input type="submit" name="find" value="정답 말하기" />
+      </p>
+    </form>
+    
+
+
+<br>
+
+    </div>
+    </br>
+<!--
+    <br>
+<a href = "/yellow/lucky" style = "text-decoration:none;">
+<div class ="button">
+  
+<p style= "
+text-decoration:none;
+font-size:15px; font-weight:bold; color:#2377bb;">도착했으면 누르세요.</p>
+</div>
+</a>
+-->
