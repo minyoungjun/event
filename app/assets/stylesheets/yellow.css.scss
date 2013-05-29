@@ -18,6 +18,10 @@ body {
 
   }
 
+.puzzle_table {
+width:640px;
+height:427px;  
+}
 
 
 .pic1 {
@@ -38,6 +42,27 @@ height:70%;
 
 
 
+}
+.circle {
+height:50px; width:50px; 
+border-style:solid;
+border-color:red;
+border-width:0px;
+border-radius:50px;
+position: relative;
+}
+
+#first_check, #first_check_1 {
+top:0px;
+left:0px;
+}
+#second_check, #second_check_1 {
+top:40px;
+left:50px;
+}
+#third_check, #third_check_1 {
+  top:190px;
+left:100px;
 }
 
 

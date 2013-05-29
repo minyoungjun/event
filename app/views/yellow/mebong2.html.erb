@@ -105,13 +105,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
       
       try
         {
-            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng1 = new GLatLng(37.4920859, 127.0145896);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
  
   if(kmdistance < 0.3) {
-    location.href = "/yellow/bus1/";
+    location.href = "/yellow/chinese1/";
   }
   else { 
         alert("아직 도착하지 못했네요ㅠㅠ지도상에서 당신의 위치를 다시한번 확인해 보시겠어요?");
@@ -136,7 +136,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {
         try
         {
-            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng1 = new GLatLng(37.4920859, 127.0145896);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
@@ -191,4 +191,16 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
     </div>
     </br>
+<a href= '/yellow/save_time?adds=mebong2' style ="position:relative; left:10%;">
+<input type = "button" value = "저장하기">
+</a>
+<br>
+<br>
+<br>
 
+<a href= '/yellow/load_time'   style ="position:relative; left:10%;" >
+<input type = "button" value = "불러오기">
+</a>
+<br>
+<br>
+<br>

@@ -1,3 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8; initial-scale=1.0; user-scalable=no;" name="viewport"/>
+    <title>Mil. Care</title>
+
+    <link href="/map.css" rel="stylesheet">
+
+<!-- According to the Google Maps API Terms of Service you are required display a Google map when using the Google Maps API. see: http://code.google.com/apis/maps/terms.html -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>    
+
 <script type="text/javascript">
 
     var my_lat, my_lon, geocoder, location1, location2, map, my_location;
@@ -44,9 +56,9 @@ function initialize() {
 
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
-    var content = 'GPS기능을 사용할 수 없습니다.(당신의 기기에 GPS가 없을 수도 있음ㅋㅋ)';
+    var content = 'Error: The Geolocation service failed.';
   } else {
-    var content = '당신의 브라우저가 GPS를 활용할 수 없는 브라우저입니다.';
+    var content = 'Error: Your browser doesn\'t support geolocation.';
   }
 
   var options = {
@@ -67,7 +79,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 //이밑에꺼는 거리계산하는거
 
     function showLocation() {
-
         geocoder.getLocations(document.forms[0].address1.value, function (response) {
             if (!response || response.Status.code != 200)
             {
@@ -92,65 +103,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
             }
         });
     }
-
-  function gaepo(){
-    if(document.forms[0].month.value == "2"&&document.forms[0].day.value == "14"){
-      alert("정답이다. 발렌타인 데이였지.");
-      location.href = "/../yellow/bench2/";
-    }
-    else { alert("틀렸다. 다시 맞춰봐라.");
-    }
-  }
-
-
-    function goal(){
-
-      calculateDistance();
-        
-
-    }
-
-    function arrive(){
-      
-      try
-        {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
-            var glatlng2 = new GLatLng(my_lat, my_lon);
-            var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
-            var kmdistance = (miledistance * 1.609344).toFixed(1);
- 
-  if(kmdistance < 1) {
-    location.href = "/yellow/lucky2/";
-  }
-  else { 
-        alert("아직 도착하지 못했네요ㅠㅠ지도상에서 당신의 위치를 다시한번 확인해 보시겠어요?");
-  }
-            
-            /*
-            document.getElementById('results').innerHTML = '<br /><strong>당신이 있는 곳부터의 거리: </strong>' + kmdistance + ' (km)';
-  */
-            
-            }
-
-        catch (error)
-        {
-            alert(error);
-        }
-
-    }
-
-
-
+    
     function calculateDistance()
     {
         try
         {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
+            var glatlng1 = new GLatLng(location1.lat, location1.lon);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
 
-            document.getElementById('results').innerHTML = '<br /><strong>당신이 있는 곳부터의 거리: </strong>' + kmdistance + ' (km)';
+            document.getElementById('results').innerHTML = '<strong> 당신이 가고싶은 곳의 주소: </strong>' + location1.address + '<br />' + '<br/>' + '<br /><strong>당신이 있는 곳부터의 거리: </strong>' + kmdistance + ' (km)';
         }
         catch (error)
         {
@@ -159,61 +122,87 @@ google.maps.event.addDomListener(window, 'load', initialize);
     }
 
     </script>
+  </head>
 
-<div class = "whitebox">
-<div class="main">
+  <body onload="initialize()">
+
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  
 <script>
+
+var sw = 0;
+
 $(function() {
+    if (sw == 0){
      $('#two').click(function(){
        $("#one").fadeOut('slow',function (){
-       $("#one").attr('src',"<%= asset_path("black.png")%>");
+
+         if(sw == 0){
+       $("#one").attr('src',"/images/second.jpg");
+       sw = 1;
+       }
+       else {
+         $("#one").attr('src',"/images/first.jpg");
+         sw = 0 ;
+         
+         }
+       
        $("#one").fadeIn('slow');
+
              return false;
               });
 
-       document.getElementById('story1').innerHTML ='<br><strong> 흑룡</strong><br><br> 안녕하신가? 나는 흑룡이라네. 작년에 많이 들었겠지. 작년이 바로 흑룡의 해였으니까. 작년에 이래 저래 많이 불려다녀서 올해는 조금 쉬고 있다네.지금도 이 벤치에서 쉬고 있었지. 여기가 추억의 장소라고? 그럼 문제를 하나 내겠네. 여기에서 뽀뽀를 한게 몇 월 며칠이었나? 맞추면 기억의 조각을 주겠네.<br><br>';
+       document.getElementById('story1').innerHTML = '클릭하셨군여';
+  
 
        return false;
 
        });
+
+     }
+     else {
+     $('#two').click(function(){
+       $("#one").fadeOut('slow',function (){
+       $("#one").attr('src',"/images/first.jpg");
+       $("#one").fadeIn('slow');
+
+             return false;
+              });
+
+       document.getElementById('story1').innerHTML = '클릭하셨군여';
+  
+
+       return false;
+
+       });
+
+
+
+
+
+    }
      });
 
 </script>
+
 <a href="" id="two">
-<img src= "<%= asset_path("bench.png")%>" id="one"  class="lucky"/>
+<img src= "/images/first.jpg" id="one" style = "height:100%; width:100%;"/>
 </a>
 
-<p id = "story1"><strong>개포시영아파트 벤치에 도착했다. 위의 사진을 눌러보자. </strong>
-<br><br>
-</div>
-</div>
-<div class ="whitebox">
-<br>
-<form style="margin-left:10px;"  onsubmit="gaepo(); return false;">
-      <p>
-<input type="text" name="month" value="" size="2" />월
-<input type="text" name="day" value="" size = "2"/>일
-        <input type="submit" name="find" value="정답 말하기" />
-      </p>
-    </form>
-    
 
 
-<br>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ko_KR/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://junminyoung.com" data-send="true" data-width="450" data-show-faces="true"></div>
+    <p id="story1"></p>
 
-    </div>
-    </br>
-<!--
-    <br>
-<a href = "/yellow/lucky" style = "text-decoration:none;">
-<div class ="button">
-  
-<p style= "
-text-decoration:none;
-font-size:15px; font-weight:bold; color:#2377bb;">도착했으면 누르세요.</p>
-</div>
-</a>
--->
+  </body>
+</html>
+

@@ -105,13 +105,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
       
       try
         {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
+            var glatlng1 = new GLatLng(37.4792703, 126.9527981);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
  
   if(kmdistance < 0.3) {
-    location.href = "/yellow/bus1/";
+    location.href = "/yellow/otsal1/";
   }
   else { 
         alert("아직 도착하지 못했네요ㅠㅠ지도상에서 당신의 위치를 다시한번 확인해 보시겠어요?");
@@ -136,7 +136,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {
         try
         {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
+            var glatlng1 = new GLatLng(37.4792703, 126.9527981);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
@@ -152,20 +152,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
 <div class = "whitebox">
-    <img src= "<%= asset_path("black.png")%>" class="lucky"/>
+    <img src= "<%= asset_path("green.jpg")%>" class="blue"/>
 
 <div class="main">
 <br>
-<h1>두번째 기억의 조각을 얻었다!</h1>
-<img src= "<%= asset_path("2_1.png")%>" class="pic2"/>
-<img src= "<%= asset_path("2_2.png")%>" class="pic2"/>
-<img src= "<%= asset_path("2_3.png")%>" class="pic2"/>
+<h1>일곱 번째 기억의 조각을 얻었다!</h1>
+<img src= "<%= asset_path("7_1.jpg")%>" class="pic2"/>
+<img src= "<%= asset_path("7_2.jpg")%>" class="pic2"/>
+<img src= "<%= asset_path("7_3.jpg")%>" class="pic2"/>
 
 
 <p>
-약간 오글오글한 사진들이군... 풋풋해서 좋아~ 그럼 다음 장소로 이동해 볼까? 다음 장소는 버스 정류장이라고 하는군. 뇽이가 가장 자주 타는 버스가 서는 곳이지. 여기서 가깝다구!
+이런 귀요미들... 소원을 들어주려했는데 소원이 없겠군. 다음 장소는 이 근처다. 아주 맛있는 인도요리집이지. 찾아 갈 수 있겠지?
 </p>
-<p><strong>406 버스 정류장으로 가보자!</strong></p>
 <br>
 </div>
 </div>
@@ -174,7 +173,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <br>
 <form style="margin-left:10px;" action="#" onsubmit="goal(); return false;">
       <p>
-<!--<input type="text" name="address1" value="" class="address_input" size="40" />-->
         <input type="submit" name="find" value="다음 장소는 여기에서 얼마나 떨어져 있나요?" />
       </p>
     </form>
@@ -192,19 +190,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
     </div>
     </br>
-<!--
-    <br>
-<a href = "/yellow/lucky" style = "text-decoration:none;">
-<div class ="button">
-  
-<p style= "
-text-decoration:none;
-font-size:15px; font-weight:bold; color:#2377bb;">도착했으면 누르세요.</p>
-</div>
-</a>
--->
-
-<a href= '/yellow/save_time?adds=bench2' style ="position:relative; left:10%;">
+<a href= '/yellow/save_time?adds=snu2' style ="position:relative; left:10%;">
 <input type = "button" value = "저장하기">
 </a>
 <br>
