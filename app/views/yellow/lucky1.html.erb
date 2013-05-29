@@ -105,12 +105,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
       
       try
         {
-            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng1 = new GLatLng(37.4788872, 126.0553945);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
  
-  if(kmdistance < 1) {
+  if(kmdistance < 0.3) {
     location.href = "/yellow/lucky2/";
   }
   else { 
@@ -136,7 +136,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {
         try
         {
-            var glatlng1 = new GLatLng(37.4592602, 126.953321);
+            var glatlng1 = new GLatLng(37.4788872, 127.0553945);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);

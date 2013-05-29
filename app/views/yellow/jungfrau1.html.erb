@@ -77,21 +77,19 @@ google.maps.event.addDomListener(window, 'load', initialize);
             {
                 location1 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
              calculateDistance(); 
-               // geocoder.getLocations(document.forms[0].address2.value, function (response) {
-                   // if (!response || response.Status.code != 200)
-                   // {
-                     //   alert("Sorry, we were unable to geocode the second address");
-                   // }
-                   // else
-                   // {
-                    //    location2 = {lat: response.Placemark[0].Point.coordinates[1], lon: response.Placemark[0].Point.coordinates[0], address: response.Placemark[0].address};
-    //                    calculateDistance();
-                   // }
-              //  });
-                
+               
             }
         });
     }
+
+  function gaepo(){
+    if(document.forms[0].bus.value == "빅토리아시크릿"){
+      alert("정답이다! 장하군.");
+      location.href = "/../yellow/jungfrau2/";
+    }
+    else { alert("7글자로 띄어쓰기 없이 써보면 될거야.");
+    }
+  }
 
 
     function goal(){
@@ -105,21 +103,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
       
       try
         {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
+            var glatlng1 = new GLatLng(37.4592602, 126.953321);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
  
-  if(kmdistance < 0.3) {
-    location.href = "/yellow/bus1/";
+  if(kmdistance < 1) {
+    location.href = "/yellow/lucky2/";
   }
   else { 
         alert("아직 도착하지 못했네요ㅠㅠ지도상에서 당신의 위치를 다시한번 확인해 보시겠어요?");
   }
-            
-            /*
-            document.getElementById('results').innerHTML = '<br /><strong>당신이 있는 곳부터의 거리: </strong>' + kmdistance + ' (km)';
-  */
+      
             
             }
 
@@ -136,7 +131,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     {
         try
         {
-            var glatlng1 = new GLatLng(37.4801777, 127.0545247);
+            var glatlng1 = new GLatLng(37.4592602, 126.953321);
             var glatlng2 = new GLatLng(my_lat, my_lon);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
@@ -152,41 +147,46 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
 <div class = "whitebox">
-    <img src= "<%= asset_path("black.png")%>" class="lucky"/>
-
 <div class="main">
-<br>
-<h1>두번째 기억의 조각을 얻었다!</h1>
-<img src= "<%= asset_path("2_1.png")%>" class="pic2"/>
-<img src= "<%= asset_path("2_2.png")%>" class="pic2"/>
-<img src= "<%= asset_path("2_3.png")%>" class="pic2"/>
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ 
+<script>
+$(function() {
+     $('#two').click(function(){
+       $("#one").fadeOut('slow',function (){
+       $("#one").attr('src',"<%= asset_path("white.jpeg")%>");
+       $("#one").attr('class',"blue");
+       $("#one").fadeIn('slow');
+             return false;
+              });
 
-<p>
-약간 오글오글한 사진들이군... 풋풋해서 좋아~ 그럼 다음 장소로 이동해 볼까? 다음 장소는 버스 정류장이라고 하는군. 뇽이가 가장 자주 타는 버스가 서는 곳이지. 여기서 가깝다구!
-</p>
-<p><strong>406 버스 정류장으로 가보자!</strong></p>
-<br>
+       document.getElementById('story1').innerHTML ='<br><strong> 백룡</strong><br><br> 안녕? 나는 융프라우를 지키는 백룡이다. 마지막 관문이라고 해서 더 어렵거나 그런 건 없어. 어짜피 9마리의 용은 다 동등하거든. 융프라우는 항상 흰 눈으로 덮여있어서 내 몸도 이렇게 하얗다. 기회가 되면 진짜 융프라우에도 꼭 한번 올라가보도록해. 뇽이도 융프라우 밑에까지는 가봤는데, 비싸서 꼭대기까지는 안올라가봤다고 하더라고. 자 그럼 마지막 퀴즈다. 작년에 뇽이가 <strong>생일선물</strong>로 똔이에게 뭘 줬을까?<br><br>';
+       
+       return false;
+
+       });
+     });
+
+</script>
+<a href="" id="two">
+<img src= "<%= asset_path("jung.png")%>" id="one"  class="lucky"/>
+</a>
+
+<p id = "story1"><strong>융프라우에 도착했다. 위의 사진을 눌러보자. </strong>
+<br><br>
 </div>
 </div>
-<div id= "map-canvas"></div>
 <div class ="whitebox">
 <br>
-<form style="margin-left:10px;" action="#" onsubmit="goal(); return false;">
+<form style="margin-left:10px;"  onsubmit="gaepo(); return false;">
       <p>
-<!--<input type="text" name="address1" value="" class="address_input" size="40" />-->
-        <input type="submit" name="find" value="다음 장소는 여기에서 얼마나 떨어져 있나요?" />
+<input type="text" name="bus" value="" size = "14"/>
+        <input type="submit" name="find" value="정답 말하기" />
       </p>
     </form>
     
-    <p id="results"></p>
 
-
-    <form style = "margin-left : 10px;" action = "#" onsubmit="arrive(); return false;">
-    <p>
-    <input type = "submit" name = "find" value = "도착했어요." />
-    </p>
-    </form>
 
 <br>
 
@@ -203,17 +203,3 @@ font-size:15px; font-weight:bold; color:#2377bb;">도착했으면 누르세요.<
 </div>
 </a>
 -->
-
-<a href= '/yellow/save_time?adds=bench2' style ="position:relative; left:10%;">
-<input type = "button" value = "저장하기">
-</a>
-<br>
-<br>
-<br>
-
-<a href= '/yellow/load_time'   style ="position:relative; left:10%;" >
-<input type = "button" value = "불러오기">
-</a>
-<br>
-<br>
-<br>

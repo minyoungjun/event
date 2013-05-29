@@ -83,11 +83,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
     }
 
   function gaepo(){
-    if(document.forms[0].bus.value == "5"){
-      alert("5번 맞다. 베트남 항공을 잊어서는 안되겠지.");
-      location.href = "/../yellow/mebong2/";
+    if(first_count == 1 && second_count == 1 && third_count == 1){
+      alert("3개 모두 찾았군. 정답이다.");
+      location.href = "/../yellow/chinese2/";
     }
-    else { alert("틀렸다. 다시 맞춰봐라.");
+    else { alert("아직 세개를 못 찾은 거 같은데... 맨 위 왼쪽에도 봤나?");
     }
   }
 
@@ -152,7 +152,62 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  
 <script>
+
+var first_count = 0;
+var second_count = 0;
+var third_count = 0;
+
+function first_red(){
+     $("#first_check").attr('style', "border-width:2px;");
+      $("#first_check_1").attr('style', "border-width:2px;");
+first_count = 1;
+}
+
+function second_red(){
+     $("#second_check").attr('style', "border-width:2px;");
+      $("#second_check_1").attr('style', "border-width:2px;");
+second_count = 1;
+}
+
+function third_red(){
+     $("#third_check").attr('style', "border-width:2px;");
+      $("#third_check_1").attr('style', "border-width:2px;");
+third_count = 1;
+}
+
+
+
 $(function() {
+    
+    $('#first_check').click(function(){
+     first_red();
+      });
+
+  $('#first_check_1').click(function(){
+    first_red();
+    });
+
+    
+    $('#second_check').click(function(){
+     second_red();
+      });
+
+  $('#second_check_1').click(function(){
+    second_red();
+    });
+
+    
+    $('#third_check').click(function(){
+     third_red();
+      });
+
+  $('#third_check_1').click(function(){
+    third_red();
+    });
+
+
+
+
      $('#two').click(function(){
        $("#one").fadeOut('slow',function (){
        $("#one").attr('src',"<%= asset_path("gragon.jpg")%>");
@@ -161,7 +216,7 @@ $(function() {
              return false;
               });
 
-       document.getElementById('story1').innerHTML ='<br><strong>회룡</strong><br><br> 나는 중국집을 지키는 용, 회룡이라네. 여기까지 오느라 수고가 많군. 짜장면 한 그릇 먹고 갈텐가? 여기는 저렴한 가격으로 승부를 거는 곳이지. 근데도 왜 많은 아이들이 만강홍에 갈까? 음... 거기가 맛있는지 나도 한번 가봐야겠군.  ';
+       document.getElementById('story1').innerHTML ='<br><strong>회룡</strong><br><br> 나는 중국집을 지키는 용, 회룡이라네. 여기까지 오느라 수고가 많군. 짜장면 한 그릇 먹고 갈텐가? 여기는 저렴한 가격으로 승부를 거는 곳이지. 근데도 왜 많은 아이들이 만강홍에 갈까? 음... 거기가 맛있는지 나도 한번 가봐야겠군. 아, 이번에는 문제를 내지 않고 <strong>틀린그림 찾기</strong>를 하겠네. 아래 그림에는 서로 다른 부분이 3개가 숨어있네. 세개를 찾은 다음에 아래의 버튼을 누르게.<br><br>';
        
        return false;
 
@@ -174,15 +229,38 @@ $(function() {
 </a>
 
 <p id = "story1"><strong>화성각에 도착했다. 위의 사진을 눌러보자. </strong>
-<br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br>
 </div>
 </div>
-<div class ="whitebox">
+<div class = "puzzle_table" style = "background-image: url(<%= asset_path 'img3.png' %>)">
+<div style = "width:320px; height:427px; position:relative; top:0px; left:0px;">
+<div class="circle" id = "first_check">
+</div>
+
+<div class="circle" id = "second_check">
+</div>
+<div 
+class = "circle"
+id = "third_check">
+</div>
+
+</div>
+<div style="width:320px; height:427px; position:relative; left:320px; top:-427px;">
+<div class = "circle" id = "first_check_1">
+</div>
+
+<div 
+class = "circle";
+ id = "second_check_1">
+</div>
+<div class = "circle" id = "third_check_1">
+</div>
+<div class ="whitebox" style="position:relative; top: 300px; left: -300px;">
 <br>
-<form style="margin-left:10px;"  onsubmit="gaepo(); return false;">
+
+<form onsubmit="gaepo(); return false;">
       <p>
-<input type="text" name="bus" value="" size = "4"/>
-        <input type="submit" name="find" value="정답 말하기" />
+        <input type="submit" name="find" value="다 찾았어요." />
       </p>
     </form>
     
@@ -192,14 +270,16 @@ $(function() {
 
     </div>
     </br>
-<!--
-    <br>
-<a href = "/yellow/lucky" style = "text-decoration:none;">
-<div class ="button">
-  
-<p style= "
-text-decoration:none;
-font-size:15px; font-weight:bold; color:#2377bb;">도착했으면 누르세요.</p>
+
+
+
+
+
 </div>
-</a>
--->
+
+
+
+
+
+    </br>
+
