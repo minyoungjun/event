@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130529172045) do
 
   create_table "missions", :force => true do |t|
-    t.string   "there",      :null => false
+    t.string   "there"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
