@@ -110,7 +110,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
             var miledistance = glatlng1.distanceFrom(glatlng2, 3959).toFixed(1);
             var kmdistance = (miledistance * 1.609344).toFixed(1);
  
-  if(kmdistance < 0.2) {
+  if(kmdistance < 0.5) {
     location.href = "/yellow/bench1/";
   }
   else { 
